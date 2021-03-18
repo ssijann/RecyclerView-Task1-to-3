@@ -17,20 +17,39 @@ class WorldListAdapter extends RecyclerView.Adapter<WorldListAdapter.WordViewHol
     private LayoutInflater mInflater;
 
 
-    class WordViewHolder extends RecyclerView.ViewHolder {
+    class WordViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
         public final TextView wordItemView;
         final WorldListAdapter mAdapter;
+
         public WordViewHolder(View itemView, WorldListAdapter adapter) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.word);
             this.mAdapter = adapter;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // Get the position of the item that was clicked.
+            int mPosition = getLayoutPosition();
+            // Use that to access the affected item in mWordList.
+            String element = mWordList.get(mPosition);
+            // Change the word in the mWordList.
+            mWordList.set(mPosition, "Clicked! " + element);
+            // Notify the adapter, that the data has changed so it can
+            // update the RecyclerView to display the data.
+            mAdapter.notifyDataSetChanged();
+
         }
     }
+
     public WorldListAdapter(Context context,
                             LinkedList<String> wordList) {
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
     }
+
     @NonNull
     @Override
     public WorldListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +69,4 @@ class WorldListAdapter extends RecyclerView.Adapter<WorldListAdapter.WordViewHol
     public int getItemCount() {
         return mWordList.size();
     }
-
-
-
 }
