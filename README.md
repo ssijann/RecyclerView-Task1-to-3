@@ -2,7 +2,7 @@
 
 <b>TASK1</b>
 <br/>
-<img src="recyclerviewtask1.png" width="200">
+<img src="task3/recyclerviewtask1.png" width="200">
 </br>
 <b>TASK2</b>
 <br/>
